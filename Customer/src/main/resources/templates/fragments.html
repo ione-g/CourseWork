@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Site Metas -->
+  <title th:text="${title}"></title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Site Icons -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="stylesheet" th:href="@{/css/main.css}" href="/static/css/main.css">
+
+  <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+
+  <script th:src="@{https://kit.fontawesome.com/2d846bec71.js}" crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <!-- Site CSS -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" th:href="@{/css/responsive.css}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+<!-- Start Main Top -->
+<div class="main-top" th:fragment="main-top">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="login-box">
+          <select id="" class="selectpicker show-tick form-control" data-placeholder="Sign In" onchange="location = this.value;">
+            <option th:text="${session.username != null} ? ${session.username} : 'Authentication'"></option>
+            <option th:if = "${session.username == null}" value="http://localhost:8020/shop/login">Sign In</option>
+            <option th:if = "${session.username != null}" value="http://localhost:8020/shop/logout">Log out</option>
+            <option value="http://localhost:8020/shop/register" >Sign Up</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header class="main-header" th:fragment="main-header">
+  <!-- Start Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+    <div class="container">
+      <!-- Start Header Navigation -->
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+      <!-- End Header Navigation -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+
+
+
+             <li> <a th:href="@{/products}">Shop </a></li>
+
+             <li> <a th:href="@{/account}">My Account</a></li>
+
+
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+
+      <!-- Start Atribute Navigation -->
+      <div class="attr-nav">
+        <ul>
+          <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+          <li class="side-menu">
+            <a th:href="@{/cart}">
+              <i class="fa fa-shopping-bag"></i>
+              <span class="badge" th:text = "${session.totalItems == null} ? '0' : ${session.totalItems}"></span>
+              <p>My Cart</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- End Atribute Navigation -->
+    </div>
+    <!-- Start Side Menu -->
+
+    <!-- End Side Menu -->
+  </nav>
+  <!-- End Navigation -->
+</header>
+<!--Navigation Product page-->
+<div class="product-item-filter row" th:fragment="nav-product">
+  <div class="col-12 col-sm-8 text-center text-sm-left">
+    <div class="toolbar-sorter-right">
+      <span>Sort by </span>
+      <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD" onchange="location = this.value;">
+        <option data-display="Select">Nothing</option>
+        <option value="http://localhost:8020/shop/high-price">High Price → Low Price</option>
+        <option value="http://localhost:8020/shop/low-price">Low Price → High Price</option>
+        <option data-display="Select">Best Selling</option>
+      </select>
+    </div>
+    <p>Showing all results</p>
+  </div>
+  <div class="col-12 col-sm-4 text-center text-sm-right">
+    <ul class="nav nav-tabs ml-auto">
+      <li>
+        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i
+                class="fa fa-th"></i> </a>
+      </li>
+      <li>
+        <a class="nav-link" href="#list-view" data-toggle="tab"> <i
+                class="fa fa-list-ul"></i> </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- Start Top Search -->
+<div class="top-search" th:fragment="top-search">
+  <div class="container">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      <input type="text" class="form-control" placeholder="Search">
+      <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+    </div>
+  </div>
+</div>
+<!-- End Top Search -->
+
+<!-- Start Slider -->
+<div  th:fragment="slider">
+
+</div>
+<!-- End Slider -->
+
+<!-- Start Feed  -->
+<div  th:fragment="instagram-box">
+
+</div>
+
+<!-- End Feed  -->
+
+
+<!-- Start Footer  -->
+<footer th:fragment="footer">
+
+</footer>
+
+<!-- ALL JS FILES -->
+<div th:fragment="script">
+  <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+  <script th:src="@{/js/popper.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <!-- ALL PLUGINS -->
+  <script th:src="@{/js/jquery.superslides.min.js}"></script>
+  <script th:src="@{/js/bootstrap-select.js}"></script>
+  <script th:src="@{/js/inewsticker.js}"></script>
+  <script th:src="@{/js/bootsnav.js.}"></script>
+  <script th:src="@{/js/images-loded.min.js}"></script>
+  <script th:src="@{/js/isotope.min.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/baguetteBox.min.js}"></script>
+  <script th:src="@{/js/form-validator.min.js}"></script>
+  <script th:src="@{/js/contact-form-script.js}"></script>
+  <script th:src="@{/js/custom.js}"></script>
+</div>
+</body>
+</html>

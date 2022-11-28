@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace="/fragments :: head">
+
+</head>
+<body>
+<div  class="vcenter">
+    <div class="container">
+        <div  class="row justify-content-center">
+
+            <div style="max-width: 500px;"   class="col-md-12 box-padding-t-b justify-content-center">
+                <h3 style="text-align: center;padding-bottom: 20px">Create an account</h3>
+
+                <form th:action="@{/do-register}" th:object = "${customerDto}" method="POST">
+                    <div class="form-group row">
+                        <div  class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control" id="input-firstname">
+                            <div style="padding: 3px" class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">       </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Last Name" th:field="*{lastName}" class="form-control" id="input-lastname">
+                            <div style="padding: 3px" class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                        </div>
+
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <input type="email" placeholder="Email (username)" th:field="*{username}" class="form-control" id="input-email">
+                    </div>
+                    <div class="form-group row mb-3">
+                        <div  class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="password" th:field="*{password}" placeholder="Password" class="form-control" id="input-password">
+                            <div style="padding: 3px" class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+                        <div class="col-sm-6"><input type="password" th:field="*{repeatPassword}" placeholder="Repeat password" class="form-control" id="input-repeat-password"></div>
+
+                    </div>
+                    <button  type="submit" class="btn-st-1">Register</button>
+                </form>
+                <div th:if="${emailError}" class="col-12 mt-4 justify-content-center">
+                    <p style="text-align: center" class="alert alert-warning" th:text="${emailError}"></p>
+                </div>
+                <div th:if="${success}" class="col-12 mt-4 justify-content-center">
+                    <p style="text-align: center" class="alert alert-success" th:text="${success}"></p>
+                </div>
+                <div th:if="${passwordError}" class="col-12 mt-4 justify-content-center">
+                    <p style="text-align: center" class="alert alert-warning" th:text="${passwordError}"></p>
+                </div>
+                <div th:if="${serverError}" class="col-12 mt-4 justify-content-center">
+                    <p style="text-align: center" class="alert alert-warning" th:text="${serverError}"></p>
+                </div>
+                <div class="mt-5 row">
+                    <div class="col-6">
+                        <a th:href="@{/login}" href="login.html">Already have an account?</a>
+                    </div>
+                    <div class="col-6">
+                        <a  style="float: right;" th:href="@{/forgot-password}" href="forgot-password.html">Forgot password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

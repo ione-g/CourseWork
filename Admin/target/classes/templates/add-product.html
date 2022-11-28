@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/fragments :: header">
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="/static/css/main.css">
+
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row justify-content-center" >
+            <div style="max-width: 700px;"   class="col-12 box-padding-t-b justify-content-center">
+                <form class="text-center" th:action="@{/save-product}" method="post" enctype="multipart/form-data" th:object="${product}">
+                    <fieldset>
+
+                        <legend style="font-weight: bold" class="text-center">NEW PRODUCT</legend>
+
+                        <div class="form-group text-center" >
+                            <label class="col-12 control-label mt-3" for="product_name">PRODUCT NAME</label>
+                            <div style=" margin-left: 25%; max-width: 50%" class="col-12 ">
+                                <input th:field="*{name}" id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-12 control-label mt-3" for="product_category">PRODUCT CATEGORY</label>
+                            <div style=" margin-left: 25%; max-width: 50%" class="col-12">
+                                <select th:field="*{category}" id="product_category" name="product_category" class="form-control">
+                                    <option th:value="null">--SELECT--</option>
+                                    <option th:each="category : ${categories}"
+                                            th:value="${category.id}"
+                                            th:text="${category.name}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-12 control-label mt-3" for="product_description">PRODUCT DESCRIPTION</label>
+                            <div style=" margin-left: 25%; max-width: 50%" class="col-12">
+                                <input  class="form-control" id="product_description" th:field="*{description}" name="product_description" type="text">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group text-center">
+                            <label class="col-12 control-label mt-3" for="available_quantity">AVAILABLE QUANTITY</label>
+                            <div style=" margin-left: 25%; max-width: 50%" class="col-12 ">
+                                <input id="available_quantity" name="available_quantity" th:field="*{currentQuantity}" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group text-center">
+                            <label class="col-12 control-label mt-3" for="price">PRICE</label>
+                            <div style=" margin-left: 25%; max-width: 50%" class="col-12 ">
+                                <input id="price" name="price" th:field="*{costPrice}" placeholder="PRICE" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3 ">
+                            <label class="col-12 control-label" for="imageProduct">Image Product</label>
+                            <div style=" margin-left: 25%; max-width: 50%"  class="col-12">
+                                <label class="btn-st-3-a">
+                                <input id="imageProduct" name="imageProduct"  type="file">Upload Image</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <button style="max-width: 50%;height: 60px"  type="submit" class="btn-st-1 mt-5">ADD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div th:replace="/fragments::script"></div>
+
+</body>
+</html>

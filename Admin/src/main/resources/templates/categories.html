@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/fragments::header">
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="/static/css/main.css">
+
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a type="button" class="btn-st-1 mt-3" data-toggle="modal" data-target="#addCategoryModal" >Add category</a>
+            <div th:if = "${size == 0}">
+                <p class="alert alert-info mt-3 mb-3 text-center">No Categories</p>
+            </div>
+            <div th:if = "${success}" class="text-center alert alert-success mt-3">
+                <p th:text="${success}"></p>
+            </div>
+            <div th:if = "${failed}" class="text-center alert alert-danger mt-3">
+                <p th:text="${failed}"></p>
+            </div>
+            <table class="table mt-3 backcolor-2" th:if="${size > 0}">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Category index</th>
+                    <th class="col">Category name</th>
+                    <th class="col">Edit category name</th>
+                    <th class="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="justify-content: center" th:each="category:${categories}">
+                    <td th:text="${category.id}">1</td>
+                    <td th:text="${category.name}"></td>
+                    <td><a  class="btn-st-1-a" id="editButton"  th:href="@{/findById/(id = ${category.id})}" >Change name</a></td>
+                    <td>
+                        <a th:if="${category.is_activated} == true"  class="btn-st-3-a" th:href="@{/delete-category/(id = ${category.id})}" >Activated</a>
+                        <a th:if="${category.is_activated} == false" class="btn-st-2-a" th:href="@{/activate-category/(id = ${category.id})}" >Deleted</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!--Додати категорію модальне вікно-->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <form th:action="@{/add-category}" method="POST" th:object="${newCategory}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">New category</h5>
+
+            </div>
+            <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="add-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" th:field="*{name}" id="add-name">
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-st-1" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn-st-1">Save</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--редагувати назву категорії модальне вікно-->
+<div class="modal fade" id="editCategoryNameModal" tabindex="-1" aria-labelledby="editCategoryNameModalLabel" aria-hidden="true">
+    <form  th:action="@{/update-category}" method="put">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategoryNameModalLabel">Edit category</h5>
+            </div>
+            <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="edit-id" class="col-form-label">ID:</label>
+                        <input type="text" class="form-control" id="edit-id" name="id" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="edit-name" name="name">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-st-1" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn-st-1">Save</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div th:replace="/fragments::script"></div>
+
+<script th:src="@{/js/categories.js}"></script>
+
+</body>
+</html>
